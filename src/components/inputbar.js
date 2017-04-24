@@ -4,14 +4,15 @@ class InputBar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { searchterm: '' };
+    this.state = { title: '' };
     this.onInputChange = this.onInputChange.bind(this);
+    this.createNote = this.createNote.bind(this);
   }
   onInputChange(event) {
-    console.log(event.target.value);
-    this.setState({ searchterm: event.target.value });
+    // console.log(event.target.value);
+    this.setState({ title: event.target.value });
     // this.props.onSearchChange(event.target.value);
-    console.log(this.state.searchterm);
+    // console.log(this.state.searchterm);
   }
 
   // https://scotch.io/tutorials/learning-react-getting-started-and-concepts
@@ -20,6 +21,8 @@ class InputBar extends Component {
   createNote(event) {
     event.preventDefault();
     console.log('print something');
+    this.props.addNote(this.state.title);
+    this.setState({ title: '' });
   }
 
   render() {

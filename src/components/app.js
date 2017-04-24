@@ -26,7 +26,21 @@ class App extends Component {
           zIndex: 26,
         },
       }),
+      newID: 3,
     };
+  }
+
+  addNote(newTitle) {
+    this.setState({
+      notes: this.state.notes.set(this.state.newID, {
+        title: newTitle,
+        text: 'I is a note 2',
+        x: 400,
+        y: 12,
+        zIndex: 26,
+      }),
+    });
+    this.state.newID += 1;
   }
 
   renderNotes() {
@@ -38,7 +52,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <InputBar onSearchChange={text => this.search(text)} />
+        <InputBar addNote={title => this.addNote(title)} />
+
         <h1>Hello:</h1>
         <div className="notecontainer">{this.renderNotes()}</div>
       </div>
