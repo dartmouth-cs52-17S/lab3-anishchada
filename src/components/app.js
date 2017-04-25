@@ -31,6 +31,7 @@ class App extends Component {
     };
 
     this.Update = this.Update.bind(this);
+    this.Delete = this.Delete.bind(this);
   }
 
   addNote(newTitle) {
@@ -54,6 +55,12 @@ class App extends Component {
     });
   }
 
+  Drag(id, field) {
+    this.setState({
+      notes: this.state.notes.update(id, (n) => { return Object.assign({}, n, field); }),
+    });
+  }
+
   Delete(id) {
     this.setState({
       notes: this.state.notes.delete(id),
@@ -62,7 +69,7 @@ class App extends Component {
 
   renderNotes() {
     return this.state.notes.entrySeq().map(([id, note]) => {
-      return (<Note id={id} note={note} title={note.title} Update={this.Update} />);
+      return (<Note id={id} note={note} title={note.title} Update={this.Update} Delete={this.Delete} />);
     });
   }
 
