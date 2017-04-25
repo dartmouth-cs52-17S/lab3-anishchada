@@ -74,10 +74,10 @@ class Note extends Component {
     if (this.state.isEditing) {
       console.log('i am editing now');
       return (
-        <div>
-          <div className="body1"><a href="" onClick={this.callUpdate}><i className="fa fa-check fa-1x" /></a></div>
-          <TextareaAutosize onChange={this.onChange}
-            style={{ boxSizing: 'border-box' }}
+        <div className="body1">
+          <div ><a href="" onClick={this.callUpdate}><i className="fa fa-check fa-1x" /></a></div>
+          <TextareaAutosize className="textbox" onChange={this.onChange}
+            style={{ boxSizing: 'border-box', minHeight: '200', minWidth: '200' }}
             minRows={3}
             maxRows={6}
             defaultValue={this.props.note.text}
@@ -109,10 +109,14 @@ class Note extends Component {
         >
           <div className="note">
             <div className="notebar">
-              <div><a href="" onClick={this.onDeleteClick}><i className="fa fa-trash fa-1x" /></a></div>
-              <div className="note-mover"><a ><i className="fa fa-arrows fa-1x" /></a></div>
-              <div>{this.props.note.title}</div>
-              <div className="body">{this.renderSomeSection()}</div>
+              <div className="flex-item">
+                {this.props.note.title}
+              </div>
+              <div className="iconbar">
+                <div className="body">{this.renderSomeSection()}</div>
+                <div><a href="" onClick={this.onDeleteClick}><i className="fa fa-trash fa-1x" /></a></div>
+                <div className="note-mover"><a ><i className="fa fa-arrows fa-1x" /></a></div>
+              </div>
             </div>
             <div className="body3">
               <div className="body2">{this.props.note.text}</div>

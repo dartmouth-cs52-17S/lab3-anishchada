@@ -24,12 +24,26 @@ body {
 .notebar {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
+}
+
+.iconbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+  padding-right: 20px;
 }
 
 .body3 {
-
   align-self: flex-start;
   margin-top: 20px;
+}
 
+.textbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  display:inline;
+  word-wrap: break-word;
 }
