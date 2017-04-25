@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
-import Textarea from 'react-textarea-autosize';
+import TextareaAutosize from 'react-textarea-autosize';
 
 class Note extends Component {
   constructor(props) {
@@ -75,19 +75,21 @@ class Note extends Component {
       console.log('i am editing now');
       return (
         <div>
-          <div><a href="" onClick={this.callUpdate}><i className="fa fa-check fa-3x" /></a></div>
-          <Textarea onChange={this.onChange}
+          <div className="body1"><a href="" onClick={this.callUpdate}><i className="fa fa-check fa-1x" /></a></div>
+          <TextareaAutosize onChange={this.onChange}
             style={{ boxSizing: 'border-box' }}
             minRows={3}
             maxRows={6}
-            defaultValue="Just a single line..."
+            defaultValue={this.props.note.text}
           />
         </div>);
     } else {
       return (
         <div>
-          <div><a href="" onClick={this.changeToggle}><i className="fa fa-envelope-square fa-3x" /></a></div>
-          {this.props.note.text}
+          <div>
+            <div className="notebar"><a href="" onClick={this.changeToggle}><i className="fa fa-envelope-square fa-1x" /></a></div>
+          </div>
+
         </div>
       );
     }
@@ -106,10 +108,15 @@ class Note extends Component {
           onStop={this.onStopDrag}
         >
           <div className="note">
-            <div><a href="" onClick={this.onDeleteClick}><i className="fa fa-trash fa-3x" /></a></div>
-            <div className="note-mover"><a ><i className="fa fa-arrows fa-3x" /></a></div>
-            <div>{this.props.note.title}</div>
-            <div>{this.renderSomeSection()}</div>
+            <div className="notebar">
+              <div><a href="" onClick={this.onDeleteClick}><i className="fa fa-trash fa-1x" /></a></div>
+              <div className="note-mover"><a ><i className="fa fa-arrows fa-1x" /></a></div>
+              <div>{this.props.note.title}</div>
+              <div className="body">{this.renderSomeSection()}</div>
+            </div>
+            <div className="body3">
+              <div className="body2">{this.props.note.text}</div>
+            </div>
           </div>
         </Draggable>
       </div>
