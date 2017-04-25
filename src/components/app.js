@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import Immutable from 'immutable';
 import InputBar from './inputbar';
@@ -28,6 +29,8 @@ class App extends Component {
       }),
       newID: 3,
     };
+
+    this.Update = this.Update.bind(this);
   }
 
   addNote(newTitle) {
@@ -43,9 +46,23 @@ class App extends Component {
     this.state.newID += 1;
   }
 
+  Update(id, field) {
+    console.log(id);
+    console.log(field);
+    this.setState({
+      notes: this.state.notes.update(id, (n) => { return Object.assign({}, n, field); }),
+    });
+  }
+
+  Delete(id) {
+    this.setState({
+      notes: this.state.notes.delete(id),
+    });
+  }
+
   renderNotes() {
     return this.state.notes.entrySeq().map(([id, note]) => {
-      return (<Note id={id} note={note} title={note.title} />);
+      return (<Note id={id} note={note} title={note.title} Update={this.Update} />);
     });
   }
 
@@ -54,7 +71,7 @@ class App extends Component {
       <div>
         <InputBar addNote={title => this.addNote(title)} />
 
-        <h1>Hello:</h1>
+        <h1>Welcome to my React Note-Taking App:</h1>
         <div className="notecontainer">{this.renderNotes()}</div>
       </div>
     );

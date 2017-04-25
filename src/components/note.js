@@ -1,19 +1,42 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
+import Textarea from 'react-textarea-autosize';
 
 class Note extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { searchterm: '' };
-    this.onInputChange = this.onInputChange.bind(this);
+    this.state = {
+      searchterm: '',
+      isEditing: false,
+    };
+
+    // this.onInputChange = this.onInputChange.bind(this);
 
     this.renderTitle = this.renderTitle.bind(this);
+    this.changeToggle = this.changeToggle.bind(this);
+    this.renderSomeSection = this.renderSomeSection.bind(this);
+    this.callUpdate = this.callUpdate.bind(this);
+    this.onChange = this.onChange.bind(this);
+    // this.onDeleteClick = this.onDeleteClick.bind(this);
   }
-  onInputChange(event) {
+  onChange(event) {
     console.log(event.target.value);
-    this.setState({ searchterm: event.target.value });
-    this.props.onSearchChange(event.target.value);
+    this.setState({ text: event.target.value });
+  }
+
+  changeToggle(event) {
+    event.preventDefault();
+    console.log('I am editing now?');
+    this.setState({ isEditing: !this.state.isEditing });
+    // this.renderSomeSection();
+  }
+
+  callUpdate(event) {
+    event.preventDefault();
+    console.log(event.target.value);
+    this.props.Update(this.props.id, { text: this.state.text });
+    this.setState({ isEditing: !this.state.isEditing });
   }
 
   renderTitle() {
@@ -32,6 +55,38 @@ class Note extends Component {
     );
   }
 
+  // https://github.com/andreypopp/react-textarea-autosize
+  // https://andreypopp.github.io/react-textarea-autosize/
+  // onChange={this.Update(this.props.note.id, { text: this.props.note.text })}
+
+  renderSomeSection() {
+    if (this.state.isEditing) {
+      console.log('i am editing now');
+      return (
+        <div>
+          <div><a href="" onClick={this.callUpdate}><i className="fa fa-check fa-3x" /></a></div>
+          <Textarea onChange={this.onChange}
+            style={{ boxSizing: 'border-box' }}
+            minRows={3}
+            maxRows={6}
+            defaultValue="Just a single line..."
+          />
+        </div>);
+    } else {
+      return (
+        <div>
+          <div><a href="" onClick={this.changeToggle}><i className="fa fa-envelope-square fa-3x" /></a></div>
+          {this.props.note.text}
+        </div>
+      );
+    }
+  }
+
+  // onDeleteClick(event) {
+  //   event.preventDefault();
+  //   this.props.Delete(this.props.note.id);
+  // }
+
   render() {
     return (
       <div>
@@ -44,9 +99,12 @@ class Note extends Component {
           onDrag={this.onDrag}
           onStop={this.onStopDrag}
         >
-          <div className="note note-mover">
-            {this.renderTitle()}
-            {this.renderText()}
+          <div className="note">
+            <div><a href="" onClick={this.changeToggle}><i className="fa fa-envelope-square fa-3x" /></a></div>
+            <div><a href="" onClick={this.onDeleteClick}><i className="fa fa-trash fa-3x" /></a></div>
+            <div className="note-mover"><a ><i className="fa fa-arrows fa-3x" /></a></div>
+            <div>{this.props.note.title}</div>
+            <div>{this.renderSomeSection()}</div>
           </div>
         </Draggable>
       </div>
