@@ -13,20 +13,30 @@ firebase.initializeApp(config);
 
 // Get a reference to the database service
 const database = firebase.database();
-console.log(database);
 
-firebase.database().ref('notes').on('value', (snapshot) => {
-  const newNoteState = snapshot.val();
-  console.log('Here is FIREBASE');
-  console.log(newNoteState);
-});
+export function fetchNotes(callback) {
+  firebase.database().ref('notes').on('value', (snapshot) => {
+    callback(snapshot.val());
+  });
+}
 
-export default function fetchNotes(callback) {
-  console.log('Inside Fetchnotes function');
+export function Delete(id) {
+  firebase.database().ref('notes').child(id).remove();
+}
+
+export function Update(id, note) {
+  console.log('updating');
+  console.log(note);
+  firebase.database().ref('notes').child(id).set(note);
+}
+
+export function Add(note) {
+  const id = database.ref('notes').push().key;
+  firebase.database().ref('notes').child(id).set(note);
 }
 
 export function writeUserData(userId, name, email, imageUrl) {
-  firebase.database().ref(`users/${userId}`).set({
+  firebase.database().ref(`notes/${userId}`).set({
     username: name,
     email,
     profile_picture: imageUrl,

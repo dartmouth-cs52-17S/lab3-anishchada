@@ -23,12 +23,13 @@ class Note extends Component {
   onChange(event) {
     console.log(event.target.value);
     this.setState({ text: event.target.value });
+    this.props.Update(this.props.id, { text: event.target.value });
   }
 
   onDrag(event, ui) {
-    event.preventDefault();
-    this.props.Update(this.props.id, { x: ui.x });
-    this.props.Update(this.props.id, { y: ui.y });
+    // event.preventDefault();
+    console.log(ui.x);
+    this.props.Update(this.props.id, { x: ui.x, y: ui.y });
   }
 
   onDeleteClick(event) {
@@ -45,9 +46,8 @@ class Note extends Component {
 
   callUpdate(event) {
     event.preventDefault();
-    console.log(event.target.value);
-    this.props.Update(this.props.id, { text: this.state.text });
     this.setState({ isEditing: !this.state.isEditing });
+    this.props.Update(this.props.id, { text: this.state.text });
   }
 
   renderTitle() {

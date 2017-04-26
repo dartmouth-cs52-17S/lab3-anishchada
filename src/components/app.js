@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Immutable from 'immutable';
-import fetchNotes from '../firebasedb';
+import * as firebasedb from '../firebasedb';
 import InputBar from './inputbar';
 import Note from './note';
 
@@ -11,55 +11,46 @@ class App extends Component {
     super(props);
 
     this.state = {
-      notes: Immutable.Map({
-        1: {
-          title: 'testing',
-          text: 'I is a note',
-          x: 400,
-          y: 12,
-          zIndex: 26,
-        },
-        2: {
-          title: 'testing',
-          text: 'I is a note 2',
-          x: 400,
-          y: 12,
-          zIndex: 26,
-        },
-      }),
+      notes: Immutable.Map(),
       newID: 3,
     };
 
     this.Update = this.Update.bind(this);
     this.Delete = this.Delete.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount() {
-    fetchNotes((notes) => {
+    firebasedb.fetchNotes((notes) => {
       this.setState({ notes: Immutable.Map(notes) });
     });
   }
 
   addNote(newTitle) {
-    this.setState({
-      notes: this.state.notes.set(this.state.newID, {
-        title: newTitle,
-        text: 'I is a note 2',
-        x: 400,
-        y: 12,
-        zIndex: 26,
-      }),
-    });
+    const note = {
+      title: newTitle,
+      text: 'I is a note 2',
+      x: 400,
+      y: 12,
+      zIndex: 26,
+    };
+    // this.setState({
+    //   notes: this.state.notes.set(this.state.newID, {
+    //     title: newTitle,
+    //     text: 'I is a note 2',
+    //     x: 400,
+    //     y: 12,
+    //     zIndex: 26,
+    //   }),
+    // });
+    firebasedb.Add(note);
     this.state.newID += 1;
   }
 
   Update(id, field) {
-    console.log(id);
     console.log(field);
     this.setState({
       notes: this.state.notes.update(id, (n) => { return Object.assign({}, n, field); }),
-    });
+    }, firebasedb.Update(id, this.state.notes.get(id)));
   }
 
   Drag(id, field) {
@@ -69,9 +60,10 @@ class App extends Component {
   }
 
   Delete(id) {
-    this.setState({
-      notes: this.state.notes.delete(id),
-    });
+    // this.setState({
+    //   notes: this.state.notes.delete(id),
+    // });
+    firebasedb.Delete(id);
   }
 
   renderNotes() {
