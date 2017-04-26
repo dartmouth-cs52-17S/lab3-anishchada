@@ -1,3 +1,8 @@
+// FIgure out how to keep notes on the screen and how to get the background in
+// Figure out how to make the default text an actual value so your text doesnt get erased when there is no edit
+// Figure out how to only display text box when you are editing
+// Make sure to get markdown working
+
 body {
   font-family: "Roboto", sans-serif;
   background: darken(white, 0.2);
@@ -5,26 +10,28 @@ body {
 
 .notetitle {
   font-weight: bold;
-  margin: 5px;
+  margin: 4px;
 }
 
 .notetext {
-  margin: 5px;
-  display:inline;
+  margin: 4px;
 }
 
 .note {
-  border: 5px solid red;
+  border: 5px solid green;
   width: 300px;
   height: 300px;
   margin: 25px;
   word-wrap: break-word;
+  background-color: #ffff66;
+
 }
 
 .notebar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
 }
 
 .iconbar {
@@ -32,7 +39,11 @@ body {
   flex-direction: row;
   justify-content: center;
   align-self: center;
-  padding-right: 20px;
+  margin: 4px;
+}
+
+.flex-item {
+    padding-right: 2px;
 }
 
 .body3 {
@@ -47,3 +58,8 @@ body {
   display:inline;
   word-wrap: break-word;
 }
+
+// References
+// http://stackoverflow.com/questions/4689481/html-css-have-border-wrap-around-text
+// http://stackoverflow.com/questions/9355677/keep-text-within-the-box
+// https://andreypopp.github.io/react-textarea-autosize/

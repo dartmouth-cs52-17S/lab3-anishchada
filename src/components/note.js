@@ -86,10 +86,10 @@ class Note extends Component {
     } else {
       return (
         <div>
-          <div>
-            <div className="notebar"><a href="" onClick={this.changeToggle}><i className="fa fa-envelope-square fa-1x" /></a></div>
-          </div>
 
+          <div className="body3">
+            <div className="notetext">{this.props.note.text}</div>
+          </div>
         </div>
       );
     }
@@ -109,18 +109,19 @@ class Note extends Component {
         >
           <div className="note">
             <div className="notebar">
-              <div className="flex-item">
+              <div className="notetitle">
                 {this.props.note.title}
               </div>
               <div className="iconbar">
-                <div className="body">{this.renderSomeSection()}</div>
-                <div><a href="" onClick={this.onDeleteClick}><i className="fa fa-trash fa-1x" /></a></div>
-                <div className="note-mover"><a ><i className="fa fa-arrows fa-1x" /></a></div>
+                <div>
+                  <div className="notebar flex-item"><a href="" onClick={this.changeToggle}><i className="fa fa-pencil-square-o fa-1x" /></a></div>
+                </div>
+                <div><a className="flex-item" href="" onClick={this.onDeleteClick}><i className="fa fa-trash fa-1x" /></a></div>
+                <div className="note-mover flex-item"><a ><i className="fa fa-arrows fa-1x" /></a></div>
               </div>
             </div>
-            <div className="body3">
-              <div className="body2">{this.props.note.text}</div>
-            </div>
+            <div className="body">{this.renderSomeSection()}</div>
+
           </div>
         </Draggable>
       </div>
