@@ -1,6 +1,6 @@
-
 import React, { Component } from 'react';
 import Immutable from 'immutable';
+import fetchNotes from '../firebasedb';
 import InputBar from './inputbar';
 import Note from './note';
 
@@ -32,6 +32,13 @@ class App extends Component {
 
     this.Update = this.Update.bind(this);
     this.Delete = this.Delete.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  componentDidMount() {
+    fetchNotes((notes) => {
+      this.setState({ notes: Immutable.Map(notes) });
+    });
   }
 
   addNote(newTitle) {
