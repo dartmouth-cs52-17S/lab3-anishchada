@@ -1,5 +1,5 @@
 body {
   font-family: "Roboto", sans-serif;
   background: darken(white, 0.2);
-  background-image: url('../img/chalkboard.jpg');
+  background-image: url('./img/chalkboard.jpg');
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
-import TextareaAutosize from 'react-textarea-autosize';
+import Textarea from 'react-textarea-autosize';
+import marked from 'marked';
 
 class Note extends Component {
   constructor(props) {
@@ -68,7 +69,7 @@ class Note extends Component {
 
   // https://github.com/andreypopp/react-textarea-autosize
   // https://andreypopp.github.io/react-textarea-autosize/
-  // onChange={this.Update(this.props.note.id, { text: this.props.note.text })}
+  // http://stackoverflow.com/questions/3578678/how-can-i-block-further-input-in-textarea-using-maxlength
 
   renderSomeSection() {
     if (this.state.isEditing) {
@@ -76,10 +77,11 @@ class Note extends Component {
       return (
         <div className="body1">
           <div ><a href="" onClick={this.callUpdate}><i className="fa fa-check fa-1x" /></a></div>
-          <TextareaAutosize className="textbox" onChange={this.onChange}
+          <Textarea className="textbox" onChange={this.onChange}
             style={{ boxSizing: 'border-box', minHeight: '200', minWidth: '200' }}
             minRows={3}
             maxRows={6}
+            maxLength="350"
             defaultValue={this.props.note.text}
           />
         </div>);
@@ -88,7 +90,7 @@ class Note extends Component {
         <div>
 
           <div className="body3">
-            <div className="notetext">{this.props.note.text}</div>
+            <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
           </div>
         </div>
       );
@@ -101,7 +103,7 @@ class Note extends Component {
         <Draggable
           handle=".note-mover"
           grid={[25, 25]}
-          defaultPosition={{ x: 20, y: 20 }}
+          defaultPosition={{ x: 50, y: 50 }}
           position={{ x: this.props.note.x, y: this.props.note.y }}
           onStart={this.onStartDrag}
           onDrag={this.onDrag}

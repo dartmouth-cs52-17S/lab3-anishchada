@@ -28,9 +28,9 @@ class InputBar extends Component {
   render() {
     return (
       <div id="inputbar">
-        <form onSubmit={this.createNote}>
-          <input onChange={this.onInputChange} value={this.state.title} />
-          <input type="submit" value="Create!" />
+        <form onSubmit={this.createNote} id="form">
+          <input onChange={this.onInputChange} value={this.state.title} id="input" />
+          <input type="submit" value="Create!" id="button" />
         </form>
       </div>
     );

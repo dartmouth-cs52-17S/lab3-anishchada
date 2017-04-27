@@ -29,8 +29,8 @@ class App extends Component {
     const note = {
       title: newTitle,
       text: 'I is a note 2',
-      x: 400,
-      y: 12,
+      x: 200,
+      y: 400,
       zIndex: 26,
     };
     // this.setState({
@@ -77,7 +77,7 @@ class App extends Component {
       <div>
         <InputBar addNote={title => this.addNote(title)} />
 
-        <h1>Welcome to my React Note-Taking App:</h1>
+        <h1 id="header">React Live Note-Taking App:</h1>
         <div className="notecontainer">{this.renderNotes()}</div>
       </div>
     );
