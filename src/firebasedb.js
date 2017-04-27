@@ -1,6 +1,12 @@
 import firebase from 'firebase';
 
-// Initialize Firebase
+// Got a lot of help from Jon Gonzalez for this component for the lab -- much thanks to him!
+// A good amount of the firebase code was provided to us in snippets by Tim in the assignment itself like snapshot()
+
+// Referenced the documentation a good amount: https://firebase.google.com/docs/database/web/read-and-write#value_events
+
+// Initialize Firebase -- from the Firebase project
+
 const config = {
   apiKey: 'AIzaSyC0ETADED65bBp7sETgXclOP70H_EGlUmg',
   authDomain: 'lab-3-firebase.firebaseapp.com',
@@ -12,6 +18,7 @@ const config = {
 firebase.initializeApp(config);
 
 // Get a reference to the database service
+
 const database = firebase.database();
 
 export function fetchNotes(callback) {
@@ -33,12 +40,4 @@ export function Update(id, note) {
 export function Add(note) {
   const id = database.ref('notes').push().key;
   firebase.database().ref('notes').child(id).set(note);
-}
-
-export function writeUserData(userId, name, email, imageUrl) {
-  firebase.database().ref(`notes/${userId}`).set({
-    username: name,
-    email,
-    profile_picture: imageUrl,
-  });
 }

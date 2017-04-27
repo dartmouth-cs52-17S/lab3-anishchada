@@ -1,10 +1,15 @@
-// FIgure out how to keep notes on the screen
-
 body {
   font-family: "Roboto", sans-serif;
   background: darken(white, 0.2);
   background-image: url('https://static1.squarespace.com/static/55e0d8d9e4b099039c59b7b8/55e4a3f8e4b0ae5c1abeed44/55e4a3fae4b0ae5c1abeed49/1441047550596/chalkboard1.jpg?format=2500w');
 }
+
+/*
+http://stackoverflow.com/questions/4689481/html-css-have-border-wrap-around-text
+http://stackoverflow.com/questions/9355677/keep-text-within-the-box
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+Used the above references for flexbox layout and to keep text within boxes appropriately below
+*/
 
 .notetitle {
   font-weight: bold;

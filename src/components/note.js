@@ -3,6 +3,11 @@ import Draggable from 'react-draggable';
 import Textarea from 'react-textarea-autosize';
 import marked from 'marked';
 
+// Some of the code for this part of the assignment came from the assignment description itself (Textarea, Draggable, etc.)
+// References:
+// https://facebook.github.io/react/tutorial/tutorial.html
+// https://facebook.github.io/react/docs/handling-events.html
+
 class Note extends Component {
   constructor(props) {
     super(props);
@@ -88,7 +93,6 @@ class Note extends Component {
     } else {
       return (
         <div>
-
           <div className="body3">
             <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
           </div>

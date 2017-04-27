@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+// This input bar code was based exclusively on Searchbar code from the Youtube SA4 assignment
+
 class InputBar extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +17,7 @@ class InputBar extends Component {
     // console.log(this.state.searchterm);
   }
 
+  // Referenced the below sites for onclick functionality and generally getting started
   // https://scotch.io/tutorials/learning-react-getting-started-and-concepts
   // http://stackoverflow.com/questions/28479239/setting-onsubmit-in-react-js
 

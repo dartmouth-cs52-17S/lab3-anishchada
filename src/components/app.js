@@ -5,6 +5,8 @@ import InputBar from './inputbar';
 import Note from './note';
 
 // This contains all note information which then gets passed to children
+// Got a good amount of help from Tim for some of this code
+// A few of the code snippets are based on the assignment description (entrySeq in rendernotes and Immutable Map)
 
 class App extends Component {
   constructor(props) {
